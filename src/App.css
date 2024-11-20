@@ -1,0 +1,151 @@
+#root {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+
+header.hero {
+  width: 100vw;
+  background-image: url("./assets/hero-image-github-profile.png");
+  aspect-ratio: 16/3;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+
+  & .input__username {
+    border-radius: 8px;
+    margin-top: 30px;
+    padding: 16px;
+    background-color: #20293A;
+    display: flex;
+    align-items: center;
+    height: fit-content;
+    width: 500px;
+
+    &:has(input:focus){
+      border: 2px solid #3662E3; 
+    }
+
+    &>input {
+      background-color: #20293A;
+      outline: none;
+      border: none;
+      text-align: 20px;
+      padding-inline-start: 10px;
+      font-weight: 600;
+      font-size: 16px;
+      color: #4A5567;
+
+      &::placeholder {
+        color: #4A5567;
+      }
+    }
+  }
+}
+
+main {
+  width: 56vw;
+}
+
+.user {
+  margin-top: 20px;
+  display: flex;
+  gap: 30px;
+  color: #4A5567;
+  font-weight: 600;
+
+  & figure {
+    width: 150px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #20293A;
+    min-width: 100px;
+    overflow: hidden;
+    aspect-ratio: 1/1;
+    margin: 0;
+    margin-top: -90px;
+
+    & img {
+      width: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  }
+}
+
+.user__info {
+  display: flex;
+  border-radius: 10px;
+  width: fit-content;
+  height: fit-content;
+  text-transform: capitalize;
+  padding-inline: 20px;
+  background: #111729;
+  gap: 20px;
+  overflow: hidden;
+
+  & .user__info--response {
+    color: #CDD5E0;
+  }
+}
+
+.info {
+  & .info__personal {
+    &>* {
+      margin: 0;
+      text-align: start;
+    }
+
+    &>h2 {
+      font-size: 36px;
+    }
+
+    &>p {
+      color: #4A5567;
+      font-weight: 600;
+    }
+  }
+
+  & .info__repositories {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
+    gap: 50px;
+
+    & div {
+      background: linear-gradient(to right, #111729, #1D1B48);
+      padding: 10px 20px;
+      border-radius: 20px;
+      height: fit-content;
+
+      &>* {
+        text-align: start;
+        margin: 0;
+      }
+
+      & .repo__description {
+        margin-top: 10px;
+        color: #4A5567;
+      }
+    }
+
+    & span {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+  }
+
+  & button {
+    margin-block: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: #4A5567;
+  }
+}
