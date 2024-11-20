@@ -1,43 +1,29 @@
 import './App.css'
-import { useEffect } from 'react'
 import { Header } from './components/Header'
 import { UserInfo } from './components/UserInfo'
 import { Repositories } from './components/Repositories'
 import { useAppSelector } from './hooks/store'
 import { useUserActions } from './hooks/useUserActions'
+import useFetchAPI from './hooks/useAPI'
+import { useEffect } from 'react'
 
 function App() {
   const user = useAppSelector(state => state.users)
   const { updateUser } = useUserActions()
-
+  const { data: userDetails, isLoading, isError } = useFetchAPI({ api: `https://api.github.com/users/${user.name}`, key: user.name })
+  const { data: initialRepos, isLoading: isLoadingRepos, isError: isErrorRepos } = useFetchAPI({ api: `https://api.github.com/users/${user.name}/repos?per_page=4&page=1`, key: `${user.name}InitialRepos` })
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        // Fetch user details
-        const userResponse = await fetch(`https://api.github.com/users/${user.name}`);
-        if (!userResponse.ok) throw new Error("Failed to fetch user details");
-        const userDetails = await userResponse.json();
+    if (!(isLoading || isLoadingRepos)) {
+      updateUser({
+        details: userDetails,
+        repositories: initialRepos,
+        page: 1,
+      })
+    }
+  }, [userDetails, initialRepos])
+  if (isLoading || isLoadingRepos) return <p>Cargando...</p>
+  if (isError || isErrorRepos) return <p>Error en la carga</p>
 
-        // Fetch initial repositories
-        const repoResponse = await fetch(
-          `https://api.github.com/users/${user.name}/repos?per_page=4&page=1`
-        );
-        if (!repoResponse.ok) throw new Error("Failed to fetch repositories");
-        const initialRepos = await repoResponse.json();
-
-        updateUser({
-          details: userDetails,
-          repositories: initialRepos,
-          page: 1,
-        })
-
-      } catch (error) {
-        console.error(error.message)
-      }
-    };
-    fetchUserData()
-
-  }, [user.name])
   return (
     <>
       <Header />

@@ -20,7 +20,7 @@ export const usersSlice = createSlice({
       ]
       state.page += 1
     }
-    
+
   }
 })
 

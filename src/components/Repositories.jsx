@@ -5,7 +5,6 @@ import { ChieldIcon, NestingIcon, StarIcon } from "../Icons"
 export function Repositories() {
   const user = useAppSelector(state => state.users)
   const { addMoreRepositories } = useUserActions()
-
   const handleGetMoreRepositories = async () => {
     try {
       const response = await fetch(
@@ -20,8 +19,7 @@ export function Repositories() {
       console.error(error.message);
     }
   };
-
-  if(user.repositories === null) return null
+  if (user.repositories === null) return null
 
   return (
     <section className="info">
