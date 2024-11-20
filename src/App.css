@@ -12,6 +12,8 @@ header.hero {
   background-image: url("./assets/hero-image-github-profile.png");
   aspect-ratio: 16/3;
   background-size: cover;
+  background-position: center;
+  min-height: 170px;
   display: flex;
   justify-content: center;
 
@@ -25,8 +27,8 @@ header.hero {
     height: fit-content;
     width: 500px;
 
-    &:has(input:focus){
-      border: 2px solid #3662E3; 
+    &:has(input:focus) {
+      border: 2px solid #3662E3;
     }
 
     &>input {
@@ -47,7 +49,7 @@ header.hero {
 }
 
 main {
-  width: 56vw;
+  width: 70vw;
 }
 
 .user {
@@ -62,7 +64,7 @@ main {
     padding: 10px;
     border-radius: 10px;
     background-color: #20293A;
-    min-width: 100px;
+    min-width: 126px;
     overflow: hidden;
     aspect-ratio: 1/1;
     margin: 0;
@@ -79,6 +81,7 @@ main {
 .user__info {
   display: flex;
   border-radius: 10px;
+  min-width: 190px;
   width: fit-content;
   height: fit-content;
   text-transform: capitalize;
@@ -86,6 +89,10 @@ main {
   background: #111729;
   gap: 20px;
   overflow: hidden;
+
+  &:last-child {
+    min-width: 250px;
+  }
 
   & .user__info--response {
     color: #CDD5E0;
@@ -110,9 +117,10 @@ main {
   }
 
   & .info__repositories {
+    width: 100%;
     margin-top: 30px;
     display: grid;
-    grid-template-columns: repeat(2, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 50px;
 
     & div {
@@ -147,5 +155,41 @@ main {
     background-color: transparent;
     border: none;
     color: #4A5567;
+  }
+}
+
+@media (width <=1000px) {
+  .user {
+    display: grid;
+    grid-template-areas:
+      "photo fields"
+      "photo fields"
+      "photo fields";
+    margin-top: 40px;
+    gap: 20px;
+
+    & figure {
+      grid-area: "photo";
+    }
+
+    & .user__info {
+      grid-area: "fields";
+    }
+  }
+}
+
+@media (width <=750px) {
+  .hero label {
+    width: 80% !important;
+  }
+
+  .user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info__repositories {
+    grid-template-columns: (1fr);
   }
 }
